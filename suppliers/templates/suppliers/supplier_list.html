@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Suppliers</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Supplier Evaluator Dashboard</h1>
+<h2>Add Supplier</h2>
+<form method='POST'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Supplier</button>
+</form>
+<h3>Sort By:</h3>
+<a href="?sort=cost">Cost</a> |
+<a href="?sort=delivery">Delivery Time</a> |
+<a href="?sort=quality">Quality</a>
+<p>Suppliers are evaluated based on cost, delivery time, and quality metrics.</p>
+<table style="border-collapse: collapse; width: 60%;">
+    <tr>
+        <th>Name</th>
+        <th>Cost</th>
+        <th>Delivery Time</th>
+        <th>Quality Rating</th>
+    </tr>
+
+    {% for supplier in suppliers %}
+    <tr {% if supplier == best_supplier %} style="background-color: lightgreen;" {% endif %}>
+        <td>{{supplier.name}}</td>
+        <td>{{supplier.cost}}</td>
+        <td>{{supplier.delivery_time}}</td>
+        <td>{{supplier.quality_rating}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+</body>
+</html>
