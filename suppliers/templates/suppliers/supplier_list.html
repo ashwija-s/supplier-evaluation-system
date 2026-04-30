@@ -3,18 +3,45 @@
 <head>
     <title>Suppliers</title>
     <style>
-        table, th, td {
-            border: 1px solid black;
-            padding: 8px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px
+        }
+        h1, h2 {
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #f5f5f5;
+        }
+        tr.highlight {
+            background-color: #c8f7c5;
+        }
+        form{
+            margin-bottom: 20px;
+        }
+        button{
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+        a {
+            margin-right: 10px;
         }
     </style>
 </head>
 
 <body>
 <h1>Supplier Evaluator Dashboard</h1>
+<p>Suppliers are evaluated based on cost, delivery time, and quality metrics.</p>
 <h2>Add Supplier</h2>
 <form method='POST'>
     {% csrf_token %}
@@ -25,7 +52,6 @@
 <a href="?sort=cost">Cost</a> |
 <a href="?sort=delivery">Delivery Time</a> |
 <a href="?sort=quality">Quality</a>
-<p>Suppliers are evaluated based on cost, delivery time, and quality metrics.</p>
 <table style="border-collapse: collapse; width: 60%;">
     <tr>
         <th>Name</th>
@@ -35,7 +61,7 @@
     </tr>
 
     {% for supplier in suppliers %}
-    <tr {% if supplier == best_supplier %} style="background-color: lightgreen;" {% endif %}>
+    <tr class="{% if supplier == best_supplier %}highlight{% endif %}">
         <td>{{supplier.name}}</td>
         <td>{{supplier.cost}}</td>
         <td>{{supplier.delivery_time}}</td>
