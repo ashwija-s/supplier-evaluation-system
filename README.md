@@ -19,3 +19,6 @@ A Django-based web application to manage and evaluate suppliers based on cost, d
 2. Install Django: pip install django
 3. Run migrations: python manage.py migrate
 4. Start server: python manage.py runserver
+
+## Live Demo
+https://supplier-evaluation-system.onrender.com
